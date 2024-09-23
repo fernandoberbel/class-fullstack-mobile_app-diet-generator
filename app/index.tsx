@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 import { colors } from "../constants/colors";
-import { Link } from "expo-router";
+import { Button } from "../components/button";
 
 export default function Index() {
   return (
@@ -15,11 +15,7 @@ export default function Index() {
         Sua dieta personalizada com inteligência artificial
       </Text>
 
-      <Link href="/step" asChild>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Gerar dieta</Text>
-        </Pressable>
-      </Link>
+      <Button title="Gerar dieta" href="/step" />
     </View>
   );
 }
@@ -45,19 +41,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 8,
     marginBottom: 8,
-  },
-  button: {
-    backgroundColor: colors.blue,
-    width: "100%",
-    height: 40,
-    borderRadius: 4,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 34,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: colors.white,
   },
 });
