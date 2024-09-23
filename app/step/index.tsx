@@ -3,6 +3,7 @@ import { colors } from "../../constants/colors";
 import { Header } from "../../components/header";
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
+import { router } from "expo-router";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,6 +26,12 @@ export default function Step() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
+
+  function handleCreate(data: FormData) {
+    console.log(data);
+
+    router.push("/create");
+  }
 
   return (
     <View style={styles.container}>
@@ -67,7 +74,7 @@ export default function Step() {
           keyboardType="numeric"
         />
 
-        <Button title="Avançar" href="/create" />
+        <Button title="Avançar" onPress={handleSubmit(handleCreate)} />
       </ScrollView>
     </View>
   );
