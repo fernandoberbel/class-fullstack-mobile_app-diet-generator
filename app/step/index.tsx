@@ -4,6 +4,7 @@ import { Header } from "../../components/header";
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import { router } from "expo-router";
+import { useDataStore } from "../../store/data";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,8 +28,17 @@ export default function Step() {
     resolver: zodResolver(schema),
   });
 
+  const setPageOne = useDataStore((state) => state.setPageOne);
+
   function handleCreate(data: FormData) {
-    console.log(data);
+    console.log("Passando dados da pagina 1");
+
+    setPageOne({
+      name: data.name,
+      weight: data.weight,
+      age: data.age,
+      height: data.height,
+    });
 
     router.push("/create");
   }
