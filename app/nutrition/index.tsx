@@ -1,4 +1,13 @@
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  Pressable,
+  Platform,
+  StatusBar,
+  SafeAreaView,
+} from "react-native";
 import { colors } from "../../constants/colors";
 import { Header } from "../../components/header";
 import { Button } from "../../components/button";
@@ -64,7 +73,15 @@ export default function Nutrition() {
 
   return (
     <View style={styles.container}>
-      <Header title="Minha dieta" />
+      <SafeAreaView style={styles.containerHeader}>
+        <View style={styles.contentHeader}>
+          <Text style={styles.title}>Minha dieta</Text>
+
+          <Pressable style={styles.buttonShare}>
+            <Text style={styles.buttonShareText}>Compartilhar</Text>
+          </Pressable>
+        </View>
+      </SafeAreaView>
     </View>
   );
 }
@@ -74,15 +91,38 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
-  content: {
+  containerHeader: {
+    backgroundColor: colors.white,
+    borderBottomLeftRadius: 14,
+    borderBottomRightRadius: 14,
+    marginBottom: 14,
+  },
+  contentHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingTop: 34,
     paddingLeft: 16,
     paddingRight: 16,
+    paddingBottom: 18,
+    borderBottomLeftRadius: 14,
+    borderBottomRightRadius: 14,
   },
-  label: {
-    fontSize: 16,
+  title: {
+    fontSize: 30,
     fontWeight: "bold",
+    color: colors.background,
+  },
+  buttonShare: {
+    backgroundColor: colors.blue,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 8,
+    borderRadius: 4,
+  },
+  buttonShareText: {
     color: colors.white,
-    marginBottom: 8,
+    fontWeight: "500",
   },
   loading: {
     flex: 1,
