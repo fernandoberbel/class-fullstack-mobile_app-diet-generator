@@ -5,6 +5,7 @@ import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import { router } from "expo-router";
 import { useDataStore } from "../../store/data";
+import React, { useRef } from "react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +21,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function Step() {
+  const buttonRef = useRef(null);
+
   const {
     control,
     handleSubmit,
@@ -84,7 +87,11 @@ export default function Step() {
           keyboardType="numeric"
         />
 
-        <Button title="Avançar" onPress={handleSubmit(handleCreate)} />
+        <Button
+          ref={buttonRef}
+          title="Avançar"
+          onPress={handleSubmit(handleCreate)}
+        />
       </ScrollView>
     </View>
   );

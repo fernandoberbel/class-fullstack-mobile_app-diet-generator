@@ -1,18 +1,21 @@
 import { Text, StyleSheet, Pressable } from "react-native";
 import { colors } from "../../constants/colors";
+import React from "react";
 
 interface ButtonProps {
   title: string;
   onPress?: () => void;
 }
 
-export function Button({ title, onPress }: ButtonProps) {
-  return (
-    <Pressable style={styles.button} onPress={onPress}>
-      <Text style={styles.buttonText}>{title}</Text>
-    </Pressable>
-  );
-}
+export const Button = React.forwardRef(
+  ({ title, onPress }: ButtonProps, ref: any) => {
+    return (
+      <Pressable style={styles.button} onPress={onPress} ref={ref}>
+        <Text style={styles.buttonText}>{title}</Text>
+      </Pressable>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   button: {
@@ -22,7 +25,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 34,
+    marginTop: 14,
   },
   buttonText: {
     fontSize: 16,

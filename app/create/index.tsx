@@ -5,6 +5,7 @@ import { Select } from "../../components/input/select";
 import { Button } from "../../components/button";
 import { router } from "expo-router";
 import { useDataStore } from "../../store/data";
+import React, { useRef } from "react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,12 +14,14 @@ import { useForm } from "react-hook-form";
 const schema = z.object({
   gender: z.string().min(1, { message: "O sexo é obrigatório" }),
   level: z.string().min(1, { message: "Selecione seu nível" }),
-  goal: z.string().min(1, { message: "O objetivo é obrigatória" }),
+  goal: z.string().min(1, { message: "O objetivo é obrigatório" }),
 });
 
 type FormData = z.infer<typeof schema>;
 
 export default function Create() {
+  const buttonRef = useRef(null);
+
   const {
     control,
     handleSubmit,
@@ -53,7 +56,7 @@ export default function Create() {
     },
   ];
 
-  const goalsOptions = [
+  const goalOptions = [
     { label: "Emagrecer", value: "emagrecer" },
     { label: "Hipertrofia", value: "Hipertrofia" },
     { label: "Hipertrofia + Definição", value: "Hipertrofia e Definição" },
@@ -61,8 +64,6 @@ export default function Create() {
   ];
 
   function handleCreate(data: FormData) {
-    console.log("Passando dados da pagina 1");
-
     setPageTwo({
       gender: data.gender,
       level: data.level,
@@ -101,10 +102,14 @@ export default function Create() {
           name="goal"
           placeholder="Selecione seu objetivo..."
           error={errors.goal?.message}
-          options={goalsOptions}
+          options={goalOptions}
         />
 
-        <Button title="Gerar dieta" onPress={handleSubmit(handleCreate)} />
+        <Button
+          ref={buttonRef}
+          title="Gerar dieta"
+          onPress={handleSubmit(handleCreate)}
+        />
       </ScrollView>
     </View>
   );
